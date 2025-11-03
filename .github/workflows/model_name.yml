@@ -1,0 +1,30 @@
+name: remame model
+
+on:
+	workflow_dispatch: 
+	push:
+		branches: [uat, main]
+	permissions:
+	contents: write
+	jobs:
+	build: 
+		runs-on: ubuntu-latest
+
+		steps:
+		- name: Checkout repository
+		users: actions/checkout@v2
+
+		- name: Rename file in test
+		if: github.ref == 'refs/heads/uat'
+		run: mv models/ecommerce_dev.model.lkml models/ecommerce_uat.model.lkml
+
+		- name: Rename file in production
+		if: github.ref == 'refs/heads/main'
+		run: mn models/ecommerce_uat.model.lkml models/ecommerce.model.lkml
+
+		- name: Push Changes
+		run: |
+			git config --global user.name 'lugattu'
+			git add -A
+			git commit -am "Change filename"
+			git push

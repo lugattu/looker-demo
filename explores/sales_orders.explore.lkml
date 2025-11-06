@@ -1,10 +1,10 @@
 include: "/views/*.view"
 include: "/config/*"
 
-explore: sales {
-join: orders {
-	type: left_outer
-	sql_on: ${sales.order_id} = ${orders.order_id}
-	relationship: many_to_one
+explore: orders {
+  join: sales {
+    type: left_outer
+    sql_on: ${orders.order_id} = ${sales.order_id} ;;
+    relationship: one_to_many
+  }
 }
-}	

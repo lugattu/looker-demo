@@ -20,7 +20,7 @@ on:
 
 		- name: Rename file in production
 		if: github.ref == 'refs/heads/main'
-		run: mn models/ecommerce_uat.model.lkml models/ecommerce.model.lkml
+		run: mv models/ecommerce_uat.model.lkml models/ecommerce.model.lkml
 
 		- name: Push Changes
 		run: |

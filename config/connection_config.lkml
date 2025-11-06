@@ -1,0 +1,1 @@
+connection: `astrafy-interview.sales_orders`
